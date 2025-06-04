@@ -12,7 +12,7 @@ const Home = () => {
 		<div className="text-center">
 			
 
-			<Contador seconds={5} />
+			<Contador seconds={20} />
 		</div>
 	);
 };

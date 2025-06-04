@@ -15,9 +15,10 @@ export const Contador = ({ seconds }) => {
    const [decenasM, setDecenasM] = useState(0);
    const [centenasM, setCentenasM] = useState(0);
    const [num, setNum] = useState(0);
-   const [isCounting, setIsCounting] = useState(true);
 
+   
 
+// FUNCION QUE SUMA EN C,D,U ETC Y REINICIA EL VALOR DE LAS UNIDADES
    const comprobador = () => {
       if (unidades === 10) {
          setDecenas(decenas => decenas + 1);
@@ -40,10 +41,14 @@ export const Contador = ({ seconds }) => {
          setDecenasM(0);
       }
 
-
+// SE LE ATRIBULLE EL VALOR DE LA CUENTA  AL HOOK NUM PARA ASI UTILIZARLO COMO COMPARATIVO
       setNum((centenasM * 100000) + (decenasM * 10000) +
          (unidadesM * 1000) + (centenas * 100) + decenas * 10 + unidades);
    }
+
+
+   //HOOK PARA IR GENERANDO NUMEROS CADA 1 SEGUNDO, EN CASO DE QUE NUM SEA IGUAL AL NUMERO INTRODUCIDO SALTA EL MENSAJE DE ALERTA
+   //INFORMANDO DE QUE YA SE HA LLEGADO AL SEGUNDO INTRODUCIDO
    useEffect(() => {
       if (num != seconds) {
          const interval = setInterval(() => {
@@ -61,11 +66,15 @@ export const Contador = ({ seconds }) => {
 
    },[num]);
 
+
+//HOOK QUE UTILIZA LA FUNCION COMPROBACION PARA IR SUMANDO EN LA DECENAS,CENTENAS ETC
    useEffect(() => {
 
       comprobador()
 
    }, [unidades])
+
+   //BOTON DE REINICIO DE CUENTA CON RESUMEN DEL NUMERO DONDE NOS HABIAMOS QUEDADO
 
 const reiniciarContador = ()=>{
    alert("La cuenta ha llegado a " + num);
@@ -88,8 +97,6 @@ const reiniciarContador = ()=>{
          <div className="header">
             <h1>Contador</h1>
          </div>
-
-
 
          <div className="content">
             <div className="seconds">
@@ -117,21 +124,11 @@ const reiniciarContador = ()=>{
             <div className="content-button">
              
             </div>
-            <button className="buttonReinicio" onClick={reiniciarContador}>Reiniciar contador</button>
+            <button className="buttonReinicio" onClick={reiniciarContador}>Reiniciar</button>
            
-
-            
-
-
-
-
-
          </div>
-         <div className="text-center"><p></p></div>
-
+   
       </div>
-
-
 
    );
 
